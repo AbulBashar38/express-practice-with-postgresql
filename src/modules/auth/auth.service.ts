@@ -1,5 +1,5 @@
 import { compare } from "bcrypt-ts";
-import jwt, { verify, type JwtPayload } from "jsonwebtoken";
+import jwt, { type JwtPayload } from "jsonwebtoken";
 import config from "../../config/index.js";
 import { pool } from "../../db/index.js";
 const loginUserIntoDB = async (payload: {
@@ -46,7 +46,10 @@ const generateFreshToken = async (token: string) => {
   if (!token) {
     throw new Error("Unauthorized");
   }
-  const decoded = verify(token, config.refresh_secret as string) as JwtPayload;
+  const decoded = jwt.verify(
+    token,
+    config.refresh_secret as string,
+  ) as JwtPayload;
 
   const userData = await pool.query(
     `

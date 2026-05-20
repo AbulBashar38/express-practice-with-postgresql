@@ -4,11 +4,12 @@ import express, {
   type Request,
   type Response,
 } from "express";
+import { pool } from "./db/index.js";
 import { authRoute } from "./modules/auth/auth.route.js";
 const app: Application = express();
 
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors());
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({

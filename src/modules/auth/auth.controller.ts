@@ -2,6 +2,8 @@ import type { Request, Response } from "express";
 import { authService } from "./auth.service.js";
 
 const loginUser = async (req: Request, res: Response) => {
+  console.log("called");
+
   try {
     const result = await authService.loginUserIntoDB(req.body);
 
